@@ -12,9 +12,13 @@ def check_and_make_dir(path, dirname):
 
 
 def error_move_log(path, filename, message, e=""):
-    check_and_make_dir(path, "Error")  # TEMP COMMENT
-    shutil.move(f"{path}{filename}", f"{path}Error/")  # TEMP COMMENT
-    logging.error(f"{message} {e}")
+    # try except that checks for Error folder and moves files and logs error.
+    try:
+        check_and_make_dir(path, "Error")  # TEMP COMMENT
+        shutil.move(f"{path}{filename}", f"{path}Error/")  # TEMP COMMENT
+        logging.error(f"{message} {e}")
+    except OSError as e:
+        logging.error(e)
 
 
 def search_list(path, files):
@@ -27,7 +31,7 @@ def search_list(path, files):
             content = f.read().split("\n")
         for file in files:
             if file in content:
-                error_move_log(path, file, "File has already been processed")
+                error_move_log(path, file, "File has already been processed.")
             else:
                 unprocessed.append(file)
         return unprocessed

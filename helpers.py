@@ -23,7 +23,7 @@ def conv_file_date(string, path):
         date_tpl = tuple([constants.MONTHS[date_list[0]], date_list[1][2:]])
         result = (date_list[0], date_tpl)
     except KeyError as e:
-        files.error_move_log(path, string, f"{string} has an error in its filename.", e)
+        files.error_move_log(path, string, "There was an error in the filename.", e)
     else:
         return result
 

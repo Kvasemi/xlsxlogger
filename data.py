@@ -41,12 +41,12 @@ def get_data(collection, worksheet, file, path):
             for i in range(20)
         ]
     except (AttributeError, IndexError, TypeError) as e:
-        logging.error(f"Retrieving data failed. {e}")
+        files.error_move_log(path, file, "Retrieving data failed.", e)
     else:
         return target_data
 
 
-def get_labels(collection, worksheet, file):
+def get_labels(collection, worksheet, file, path):
     # retrieves labels from file
 
     logging.info(f"Retrieving labels from file...")
@@ -65,7 +65,7 @@ def get_labels(collection, worksheet, file):
             for i in range(20)
         ]
     except (AttributeError, IndexError, TypeError) as e:
-        logging.error(f"Retrieving labels failed. {e}")
+        files.error_move_log(path, file, "Retrieving labels failed.", e)
     else:
         return target_labels
 
@@ -73,7 +73,7 @@ def get_labels(collection, worksheet, file):
 def log_data(path, data_pairs, filename):
     # takes a tuple of label and data values and logs message to file
 
-    logging.info(f"Attempting to write to log : {os.getcwd()}/eval_week2.log...")
+    logging.info(f"Attempting to write to log : {os.getcwd()}/main.log...")
 
     log_message = []
     data = data_pairs[0]
@@ -116,7 +116,7 @@ def manage_data(path, filename):
     try:
 
         col_collection = ws2.iter_cols()
-        labels = get_labels(col_collection, ws2, filename)
+        labels = get_labels(col_collection, ws2, filename, path)
 
         col_collection = ws2.iter_cols()
         data = get_data(col_collection, ws2, filename, path)
