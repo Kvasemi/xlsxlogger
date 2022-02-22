@@ -21,7 +21,7 @@ def main(path):
     logging.info(f"eval_week2.py started. Searching directory {path}...")
 
     try:
-        try_dirs = next(os.walk(path))
+        next(os.walk(path))
     except StopIteration:
         logging.error("Path provided is invalid.")
 

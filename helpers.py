@@ -56,7 +56,7 @@ def score_calculator(label, data):
             return "good"
         elif data < 100:
             return "bad"
-    elif label.startswith("Dectrators"):
+    elif label.startswith("Dectractors"):
         if data > 100:
             return "good"
         elif data < 100:
