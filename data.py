@@ -82,12 +82,13 @@ def log_data(path, data_pairs, filename):
     try:
         for i in range(0, 20):
             if labels[i] is not None:
-                # had to turn log_message back to list because of strange bug
                 log_message = list(log_message)
                 if type(data[i]) == float:
                     log_message.append(f"\n{labels[i].strip()} : {data[i]*100}%")
                 elif data[i] is None:
                     log_message.append(f"\n{labels[i].strip()}")
+                elif helpers.score_calculator(labels[i], data[i]) is None:
+                    log_message.append(f"\n{labels[i].strip()} : {data[i]}")
                 else:
                     log_message.append(
                         f"\n{labels[i].strip()} : {data[i]} {helpers.score_calculator(labels[i], data[i])}"
@@ -97,8 +98,8 @@ def log_data(path, data_pairs, filename):
         logging.error(e)
     else:
         logging.info(f"{filename} has been successfully processed!{log_message}")
-        files.check_and_make_dir(path, "Archives")  # TEMP COMMENT
-        shutil.move(f"{path}{filename}", f"{path}Archives/")  # TEMP COMMENT
+        files.check_and_make_dir(path, "Archives")
+        shutil.move(f"{path}{filename}", f"{path}Archives/")
         return log_message
 
 

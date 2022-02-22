@@ -33,7 +33,7 @@ def main(path):
             for file in remaining_files:
                 log_result = data.manage_data(path, file)
                 if log_result is not None and len(log_result) != 0:
-                    files.write_list(constants.PATH, file)  # TEMP
+                    files.write_list(constants.PATH, file)
     except FileNotFoundError as e:
         logging.error(e)
 
